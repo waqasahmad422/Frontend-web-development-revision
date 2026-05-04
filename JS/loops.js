@@ -25,16 +25,23 @@ for (let i = 1; i <= 4; i++) {
   for (let j = 1; j <= i; j++) {
     row += n;
     n++;
+  }
+  console.log(row);
 }
-console.log(row);
+
+for (let i = 4; i >= 1; i--) {
+  let row = "";
+  for (let j = 5; j >= 5 - i; j--) {
+    row += j;
+  }
+  console.log(row);
 }
 
-
-
-for(let i=4; i>=1; i--){
-  let row = ""; 
-    for(let j=5; j>=5-i; j--){
-        row += j;
-    }
-    console.log(row);
+//      *
+//     ***
+//    *****
+//   *******
+for (let i = 1; i <= 4; i++) {
+  let row = " ".repeat(4 - i) + "*".repeat(2 * i - 1);
+  console.log(row);
 }
