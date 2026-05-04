@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let todoList = [];
+      let request = prompt("Please enter your request");
+      // console.log(request);
+      while(true){
+          if(request == "quite"){
+              console.log("quitting request");
+              break;
+          }
+
+          if(request == "list"){
+              console.log("-------------------");
+              for(i=0; i<todoList.length; i++){
+                  console.log(i," ",todoList[i]);
+              }
+              console.log("-------------------");
+          }
+          else if(request=="add"){
+                let task = prompt("Enter the task you want to add");
+                todoList.push(task);
+                console.log(`${task} added to the list`);
+          }
+          else if(request == "delete"){
+            let idx = prompt("Enter the index of the task you want to delete");
+            todoList.splice(idx,1);
+            console.log(`Task ${idx} deleted from the list`);
+          }
+          request = prompt("Please enter your request");
+      }
+    </script>
+  </body>
+</html>
