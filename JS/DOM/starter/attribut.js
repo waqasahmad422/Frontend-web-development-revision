@@ -8,3 +8,10 @@ let heading=document.querySelector('h2');
 heading.classList.add("green")
 console.log(heading.classList.contains("underline"))
 console.log(main.classList)
+
+
+
+let h4=document.querySelector('h4');
+console.log(h4.parentElement)
+console.log(h4.nextElementSibling)
+console.log(h4.children)
