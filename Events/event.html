@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        div {
+            width: 500px;
+            height: 150px;
+            margin-top: 20px;
+            padding: 20px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+
+        }
+    </style>
+</head>
+<body>
+    <!-- inline js method for event handling  -->
+    <h1>Generate a random color</h1>
+    <button id="btn">Generate Color</button>
+    <div>
+        This is your new color
+    </div>
+
+
+    <script>
+        let btn = document.getElementById('btn');
+        let div = document.querySelector('div');
+        btn.addEventListener('click', function() {
+            let r=Math.floor((Math.random()*255)+1);
+            let g=Math.floor((Math.random()*255)+1);
+            let b=Math.floor((Math.random()*255)+1);
+            let randomColor = `rgb(${r}, ${g}, ${b})`;
+            div.style.backgroundColor = randomColor;
+            div.textContent = `This is your new color: ${randomColor}`;
+        });
+    </script>
+</body>
+</html>
