@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <rect width="500" height="500" fill="#F5F7FA"/>
+  
+  <!-- Hexagon outline -->
+  <polygon points="250,90 350,140 350,260 250,310 150,260 150,140" 
+           fill="none" stroke="#0B1F3B" stroke-width="4" stroke-linejoin="miter"/>
+  
+  <!-- Inner hexagon (thin) -->
+  <polygon points="250,115 330,155 330,245 250,285 170,245 170,155" 
+           fill="none" stroke="#00C2FF" stroke-width="2" stroke-linejoin="miter" opacity="0.7"/>
+  
+  <!-- Circuit lines - horizontal through center -->
+  <line x1="180" y1="200" x2="220" y2="200" stroke="#0B1F3B" stroke-width="2.5"/>
+  <line x1="280" y1="200" x2="320" y2="200" stroke="#0B1F3B" stroke-width="2.5"/>
+  
+  <!-- Circuit lines - vertical -->
+  <line x1="250" y1="135" x2="250" y2="180" stroke="#0B1F3B" stroke-width="2.5"/>
+  <line x1="250" y1="220" x2="250" y2="265" stroke="#0B1F3B" stroke-width="2.5"/>
+  
+  <!-- Diagonal circuit traces -->
+  <line x1="200" y1="165" x2="230" y2="195" stroke="#00C2FF" stroke-width="2"/>
+  <line x1="270" y1="205" x2="300" y2="235" stroke="#00C2FF" stroke-width="2"/>
+  <line x1="270" y1="195" x2="300" y2="165" stroke="#00C2FF" stroke-width="2"/>
+  <line x1="200" y1="235" x2="230" y2="205" stroke="#00C2FF" stroke-width="2"/>
+  
+  <!-- Nodes (dots/circles) -->
+  <circle cx="220" cy="200" r="5" fill="#00C2FF"/>
+  <circle cx="280" cy="200" r="5" fill="#00C2FF"/>
+  <circle cx="250" cy="180" r="5" fill="#00C2FF"/>
+  <circle cx="250" cy="220" r="5" fill="#00C2FF"/>
+  <circle cx="250" cy="135" r="4" fill="#0B1F3B"/>
+  <circle cx="250" cy="265" r="4" fill="#0B1F3B"/>
+  
+  <!-- Small decorative nodes on diagonal lines -->
+  <circle cx="215" cy="180" r="3" fill="#0B1F3B" opacity="0.6"/>
+  <circle cx="285" cy="220" r="3" fill="#0B1F3B" opacity="0.6"/>
+  
+  <!-- Top-left corner circuit detail -->
+  <circle cx="170" cy="155" r="3.5" fill="#00C2FF"/>
+  <line x1="170" y1="155" x2="155" y2="155" stroke="#00C2FF" stroke-width="1.5"/>
+  <circle cx="155" cy="155" r="2.5" fill="#0B1F3B" opacity="0.5"/>
+  
+  <!-- Top-right corner circuit detail -->
+  <circle cx="330" cy="155" r="3.5" fill="#00C2FF"/>
+  <line x1="330" y1="155" x2="345" y2="155" stroke="#00C2FF" stroke-width="1.5"/>
+  <circle cx="345" cy="155" r="2.5" fill="#0B1F3B" opacity="0.5"/>
+  
+  <!-- Bottom circuit details -->
+  <circle cx="170" cy="245" r="3" fill="#00C2FF" opacity="0.7"/>
+  <circle cx="330" cy="245" r="3" fill="#00C2FF" opacity="0.7"/>
+  
+  <!-- Central hub node -->
+  <circle cx="250" cy="200" r="8" fill="#0B1F3B"/>
+  <circle cx="250" cy="200" r="3.5" fill="#00C2FF"/>
+  
+  <!-- Subtle glow effect on center -->
+  <circle cx="250" cy="200" r="14" fill="none" stroke="#00C2FF" stroke-width="0.5" opacity="0.4"/>
+  
+  <!-- NITS Text - ALL CAPS, spaced out -->
+  <text x="250" y="375" font-family="'Montserrat', 'Segoe UI', Arial, sans-serif" font-weight="800" 
+        font-size="52" fill="#0B1F3B" text-anchor="middle" letter-spacing="8">NITS</text>
+  
+  <!-- Subtitle - National Institute of Technical System -->
+  <text x="250" y="410" font-family="'Montserrat', 'Segoe UI', Arial, sans-serif" font-weight="400" 
+        font-size="13" fill="#444444" text-anchor="middle" letter-spacing="3.5">NATIONAL INSTITUTE OF TECHNICAL SYSTEM</text>
+  
+  <!-- Small decorative line between NITS and subtitle -->
+  <line x1="195" y1="390" x2="305" y2="390" stroke="#00C2FF" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- Side tech accents - left -->
+  <circle cx="70" cy="100" r="2" fill="#00C2FF" opacity="0.3"/>
+  <circle cx="60" cy="90" r="1.5" fill="#0B1F3B" opacity="0.2"/>
+  
+  <!-- Side tech accents - right -->
+  <circle cx="430" cy="100" r="2" fill="#00C2FF" opacity="0.3"/>
+  <circle cx="440" cy="90" r="1.5" fill="#0B1F3B" opacity="0.2"/>
+</svg>
