@@ -1,0 +1,671 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Typing Master | Dark Organ · Organic Focus</title>
+    <!-- Font Awesome 6 (free icon set) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Fira Code', 'Inter', system-ui, -apple-system, monospace;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #141a12, #0a0e08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+
+        /* main glass card — dark organ palette */
+        .typing-app {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(20, 24, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.7), inset 0 1px 1px rgba(210, 180, 140, 0.08);
+            border: 1px solid rgba(110, 90, 60, 0.5);
+            transition: all 0.2s ease;
+            overflow: hidden;
+        }
+
+        .app-header {
+            padding: 1.5rem 2rem;
+            background: rgba(12, 15, 9, 0.8);
+            border-bottom: 1px solid rgba(160, 130, 70, 0.35);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #bc9a6c, #7c9a5e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            margin-right: 0.4rem;
+            background: linear-gradient(135deg, #bc9a6c, #7c9a5e);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            color: #a49474;
+            margin-top: 0.2rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .timer-select {
+            background: #1f241b;
+            border: 1px solid #5f543a;
+            border-radius: 2rem;
+            padding: 0.4rem 1rem;
+            color: #eadbbc;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .timer-select:hover {
+            border-color: #b89a5c;
+            background: #2c3325;
+        }
+
+        .btn {
+            background: linear-gradient(95deg, #272d1f, #1a1f15);
+            border: 1px solid #5e553b;
+            padding: 0.5rem 1.3rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #e2d8c0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn i {
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(105deg, #6f4f2e, #4a6230);
+            border-color: #b88b4a;
+            color: #fef3df;
+            box-shadow: 0 2px 6px rgba(80, 55, 20, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(105deg, #8b643c, #5a7940);
+            box-shadow: 0 6px 14px rgba(70, 50, 15, 0.5);
+        }
+
+        .btn:hover {
+            background: #3a3f2c;
+            border-color: #c6a162;
+            color: #fff2e0;
+        }
+
+        /* main content */
+        .main-panel {
+            padding: 2rem 2rem 1.8rem;
+        }
+
+        .target-container {
+            background: #151b10;
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            border: 1px solid #4e4530;
+            box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.6), 0 8px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .target-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            color: #b9a46b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .target-label i {
+            font-size: 0.85rem;
+        }
+
+        .target-text {
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 1.45rem;
+            line-height: 1.5;
+            word-break: break-word;
+            white-space: pre-wrap;
+            color: #e3dcc9;
+            font-weight: 500;
+        }
+
+        .target-text span.correct {
+            background-color: rgba(100, 140, 60, 0.3);
+            color: #c2e0a8;
+            border-bottom: 1px solid #7aa84f;
+        }
+
+        .target-text span.wrong {
+            background-color: rgba(180, 80, 40, 0.4);
+            color: #f7bc8b;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #c96f32;
+        }
+
+        .target-text span.pending {
+            color: #8f8a6e;
+        }
+
+        .input-area {
+            margin-top: 1rem;
+        }
+
+        textarea {
+            width: 100%;
+            background: #0f130c;
+            border: 2px solid #4e4430;
+            border-radius: 1.5rem;
+            padding: 1.2rem 1.5rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: #efe6d2;
+            resize: vertical;
+            outline: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        textarea:focus {
+            border-color: #b88b4a;
+            box-shadow: 0 0 0 3px rgba(160, 110, 40, 0.4);
+            background: #171e12;
+        }
+
+        textarea:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #1c2218;
+        }
+
+        /* stats dashboard */
+        .stats-dashboard {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 1rem;
+            margin: 1.5rem 0 1rem;
+            background: rgba(15, 19, 11, 0.75);
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            border: 1px solid #5a4f34;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 100px;
+            text-align: center;
+            background: #191f15;
+            padding: 0.6rem 0.8rem;
+            border-radius: 1.2rem;
+            box-shadow: inset 0 1px 1px #3f3a28, 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .stat-value {
+            font-size: 1.9rem;
+            font-weight: 800;
+            font-family: monospace;
+            background: linear-gradient(145deg, #f3e5be, #b9ab7a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #cbbd8c;
+            margin-top: 0.3rem;
+        }
+
+        .timer-badge {
+            background: #161f11;
+            border-radius: 2rem;
+            padding: 0.2rem 1rem;
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.5rem;
+        }
+
+        .timer-digits {
+            font-size: 1.9rem;
+            font-weight: 800;
+            font-family: monospace;
+            color: #e6bc7b;
+        }
+
+        .status-message {
+            text-align: center;
+            margin-top: 1.2rem;
+            font-size: 0.85rem;
+            color: #c7ba91;
+            background: #1a2016;
+            display: inline-block;
+            width: auto;
+            padding: 0.5rem 1.2rem;
+            border-radius: 3rem;
+        }
+
+        .status-message i {
+            margin-right: 0.4rem;
+        }
+
+        footer {
+            padding: 1rem 2rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #8f8262;
+            border-top: 1px solid #3e372a;
+        }
+
+        @media (max-width: 750px) {
+            .main-panel {
+                padding: 1.5rem;
+            }
+            .target-text {
+                font-size: 1.1rem;
+            }
+            textarea {
+                font-size: 1rem;
+            }
+            .stat-value {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="typing-app">
+    <div class="app-header">
+        <div class="logo">
+            <h1><i class="fa-solid fa-leaf"></i> Typing Master</h1>
+            <p>dark organ · organic precision</p>
+        </div>
+        <div class="controls">
+            <select id="timeLimitSelect" class="timer-select">
+                <option value="30">30 sec</option>
+                <option value="60" selected>60 sec</option>
+                <option value="90">90 sec</option>
+                <option value="120">120 sec</option>
+            </select>
+            <button id="resetBtn" class="btn"><i class="fa-solid fa-rotate-right"></i> Restart</button>
+            <button id="nextQuoteBtn" class="btn btn-primary"><i class="fa-solid fa-feather"></i> Next Quote</button>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <div class="target-container">
+            <div class="target-label"><i class="fa-regular fa-file-lines"></i> ORGANIC TEXT</div>
+            <div id="targetDisplay" class="target-text"></div>
+        </div>
+
+        <div class="input-area">
+            <textarea id="userInput" rows="3" placeholder="Start typing here... The timer begins on first keystroke. Stay focused!" autocomplete="off"></textarea>
+        </div>
+
+        <div class="stats-dashboard">
+            <div class="stat-card">
+                <div class="stat-value" id="wpmValue">0</div>
+                <div class="stat-label">WPM</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="accuracyValue">100</div>
+                <div class="stat-label">ACCURACY %</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="correctCharsValue">0</div>
+                <div class="stat-label">CORRECT</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="mistakesValue">0</div>
+                <div class="stat-label">MISTAKES</div>
+            </div>
+            <div class="stat-card">
+                <div class="timer-badge">
+                    <i class="fa-regular fa-hourglass-half" style="color:#e6bc7b; font-size:1.2rem;"></i>
+                    <span class="timer-digits" id="timerDisplay">01:00</span>
+                </div>
+                <div class="stat-label">TIME LEFT</div>
+            </div>
+        </div>
+        <div id="statusMsg" class="status-message"><i class="fa-solid fa-seedling"></i> Ready — choose a quote or restart, then begin typing</div>
+    </div>
+    <footer>live character highlighting · organic dark theme · real-time accuracy & speed</footer>
+</div>
+
+<script>
+    // ---------- QUOTE DATABASE (professional & diverse) ----------
+    const QUOTES = [
+        "The secret of getting ahead is getting started. The secret of getting started is breaking your complex overwhelming tasks into small manageable tasks, and then starting on the first one.",
+        "Programming isn't about what you know; it's about what you can figure out. Persistence and logical thinking will always lead you to solutions.",
+        "Typing fast is a skill, but typing with precision is an art. Master both and you'll express your thoughts without friction.",
+        "The best time to plant a tree was twenty years ago. The second best time is now. Start your journey today without overthinking.",
+        "Efficiency is doing things right; effectiveness is doing the right things. In typing, both accuracy and speed define your mastery.",
+        "Simplicity is the soul of efficiency. Clean code, sharp focus, and consistent practice will elevate your craft.",
+        "Don't watch the clock; do what it keeps going. Every correct keystroke builds momentum toward excellence.",
+        "Learning to type without errors feels slow at first, but it builds neural highways of precision. Trust the process."
+    ];
+
+    // DOM elements
+    const targetDisplayDiv = document.getElementById('targetDisplay');
+    const userTextarea = document.getElementById('userInput');
+    const wpmSpan = document.getElementById('wpmValue');
+    const accuracySpan = document.getElementById('accuracyValue');
+    const correctCharsSpan = document.getElementById('correctCharsValue');
+    const mistakesSpan = document.getElementById('mistakesValue');
+    const timerDisplaySpan = document.getElementById('timerDisplay');
+    const resetBtn = document.getElementById('resetBtn');
+    const nextQuoteBtn = document.getElementById('nextQuoteBtn');
+    const timeLimitSelect = document.getElementById('timeLimitSelect');
+    const statusMsgDiv = document.getElementById('statusMsg');
+
+    // Core variables
+    let targetText = "";
+    let timerInterval = null;
+    let testActive = false;        // whether timer is running
+    let timeLeftSeconds = 60;      // current time left
+    let selectedTimeLimit = 60;    // default from dropdown
+    let isCompleted = false;        // test finished by completing text
+    let isExpired = false;          // time ran out
+
+    function formatTime(seconds) {
+        if (seconds < 0) seconds = 0;
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function updateTimerDisplay() {
+        timerDisplaySpan.innerText = formatTime(timeLeftSeconds);
+    }
+
+    function stopTimer() {
+        if (timerInterval) {
+            clearInterval(timerInterval);
+            timerInterval = null;
+        }
+        testActive = false;
+    }
+
+    function startTimer() {
+        if (timerInterval) stopTimer();
+        if (isCompleted || isExpired) return;
+        if (timeLeftSeconds <= 0) {
+            if (!isExpired) triggerTimeOut();
+            return;
+        }
+        testActive = true;
+        timerInterval = setInterval(() => {
+            if (!testActive) return;
+            if (timeLeftSeconds <= 1) {
+                timeLeftSeconds = 0;
+                updateTimerDisplay();
+                stopTimer();
+                triggerTimeOut();
+            } else {
+                timeLeftSeconds--;
+                updateTimerDisplay();
+                if (!isCompleted && !isExpired) {
+                    updateStatsAndHighlight();
+                }
+            }
+        }, 1000);
+    }
+
+    function triggerTimeOut() {
+        if (isExpired || isCompleted) return;
+        isExpired = true;
+        testActive = false;
+        stopTimer();
+        userTextarea.disabled = true;
+        statusMsgDiv.innerHTML = '<i class="fa-regular fa-clock"></i> Time\'s up! Press \'Restart\' or \'Next Quote\' to try again.';
+        statusMsgDiv.style.color = "#f3bc7b";
+        updateStatsAndHighlight();
+    }
+
+    function handleCompletion() {
+        if (isCompleted || isExpired) return;
+        isCompleted = true;
+        testActive = false;
+        stopTimer();
+        userTextarea.disabled = true;
+        statusMsgDiv.innerHTML = '<i class="fa-solid fa-tree"></i> COMPLETE! You mastered the quote! <i class="fa-solid fa-tree"></i> Press \'Next Quote\' for new growth.';
+        statusMsgDiv.style.color = "#bcda8c";
+        updateStatsAndHighlight();
+    }
+
+    function computeStatsAndHighlight() {
+        const inputText = userTextarea.value;
+        const target = targetText;
+        const inputLen = inputText.length;
+        const targetLen = target.length;
+
+        let correctCount = 0;
+        const minLen = Math.min(inputLen, targetLen);
+        for (let i = 0; i < minLen; i++) {
+            if (inputText[i] === target[i]) correctCount++;
+        }
+        const mistakesCount = inputLen - correctCount;
+        const accuracy = inputLen === 0 ? 100 : (correctCount / inputLen) * 100;
+
+        let wpm = 0;
+        if (!isExpired && !isCompleted && testActive === false && timeLeftSeconds === selectedTimeLimit && inputLen === 0) {
+            wpm = 0;
+        } else {
+            const totalSecondsElapsed = selectedTimeLimit - timeLeftSeconds;
+            if (totalSecondsElapsed > 0 && correctCount > 0) {
+                const minutesElapsed = totalSecondsElapsed / 60;
+                const rawWpm = (correctCount / 5) / minutesElapsed;
+                wpm = Math.floor(rawWpm);
+            } else if (isCompleted && inputLen === targetLen && correctCount === targetLen) {
+                const usedSeconds = selectedTimeLimit - timeLeftSeconds;
+                if (usedSeconds > 0) {
+                    const minutesElapsed = usedSeconds / 60;
+                    const rawWpm = (correctCount / 5) / minutesElapsed;
+                    wpm = Math.floor(rawWpm);
+                } else if (usedSeconds === 0 && correctCount > 0) {
+                    wpm = correctCount;
+                }
+            }
+            if (wpm < 0) wpm = 0;
+        }
+
+        wpmSpan.innerText = wpm;
+        accuracySpan.innerText = Math.floor(accuracy);
+        correctCharsSpan.innerText = correctCount;
+        mistakesSpan.innerText = mistakesCount;
+
+        let html = '';
+        for (let i = 0; i < target.length; i++) {
+            const targetChar = target[i];
+            let statusClass = 'pending';
+            if (i < inputLen) {
+                if (inputText[i] === targetChar) {
+                    statusClass = 'correct';
+                } else {
+                    statusClass = 'wrong';
+                }
+            }
+            let displayChar = targetChar === ' ' ? '&nbsp;' : targetChar.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            });
+            if (targetChar === ' ') displayChar = '&nbsp;';
+            html += `<span class="${statusClass}">${displayChar}</span>`;
+        }
+        targetDisplayDiv.innerHTML = html;
+
+        if (!isCompleted && !isExpired && inputLen === targetLen && correctCount === targetLen) {
+            handleCompletion();
+        }
+
+        if (inputLen > targetLen) {
+            const truncated = inputText.slice(0, targetLen);
+            userTextarea.value = truncated;
+            computeStatsAndHighlight();
+        }
+    }
+
+    function updateStatsAndHighlight() {
+        if (!targetText) return;
+        computeStatsAndHighlight();
+    }
+
+    function fullReset(keepQuote = true) {
+        stopTimer();
+        testActive = false;
+        isCompleted = false;
+        isExpired = false;
+        timeLeftSeconds = selectedTimeLimit;
+        updateTimerDisplay();
+        userTextarea.value = "";
+        userTextarea.disabled = false;
+        if (targetText) {
+            updateStatsAndHighlight();
+        }
+        statusMsgDiv.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Restarted! Start typing to begin the timer.';
+        statusMsgDiv.style.color = "#c7ba91";
+        userTextarea.focus();
+        if (targetText) userTextarea.maxLength = targetText.length;
+    }
+
+    function loadNewQuote() {
+        stopTimer();
+        testActive = false;
+        isCompleted = false;
+        isExpired = false;
+        let newQuote = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+        if (QUOTES.length > 1 && newQuote === targetText) {
+            newQuote = QUOTES[(Math.floor(Math.random() * QUOTES.length) + 1) % QUOTES.length];
+        }
+        targetText = newQuote;
+        timeLeftSeconds = selectedTimeLimit;
+        updateTimerDisplay();
+        userTextarea.value = "";
+        userTextarea.disabled = false;
+        userTextarea.maxLength = targetText.length;
+        updateStatsAndHighlight();
+        statusMsgDiv.innerHTML = '<i class="fa-regular fa-star"></i> New organic quote loaded! Type to flow.';
+        statusMsgDiv.style.color = "#c7ba91";
+        userTextarea.focus();
+    }
+
+    function onTimeLimitChange() {
+        const newVal = parseInt(timeLimitSelect.value, 10);
+        if (isNaN(newVal)) return;
+        selectedTimeLimit = newVal;
+        if (!testActive && !isCompleted && !isExpired) {
+            timeLeftSeconds = selectedTimeLimit;
+            updateTimerDisplay();
+            statusMsgDiv.innerHTML = `<i class="fa-regular fa-hourglass-half"></i> Timer set to ${selectedTimeLimit} seconds. Restart to apply exact.`;
+        } else if (testActive) {
+            statusMsgDiv.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Timer change only after reset or new quote (test active).';
+        } else {
+            if (!testActive) {
+                timeLeftSeconds = selectedTimeLimit;
+                updateTimerDisplay();
+            }
+        }
+    }
+
+    function onUserInput() {
+        if (!targetText) return;
+        let currentInput = userTextarea.value;
+        if (currentInput.length > targetText.length) {
+            currentInput = currentInput.slice(0, targetText.length);
+            userTextarea.value = currentInput;
+        }
+        if (!testActive && !isCompleted && !isExpired && userTextarea.value.length > 0 && timeLeftSeconds > 0) {
+            startTimer();
+            statusMsgDiv.innerHTML = '<i class="fa-regular fa-hourglass-start"></i> Timer started — mindful typing.';
+            statusMsgDiv.style.color = "#e6bc7b";
+        }
+        updateStatsAndHighlight();
+    }
+
+    function handleReset() {
+        if (targetText) {
+            fullReset(true);
+        } else {
+            if (QUOTES.length) targetText = QUOTES[0];
+            fullReset(true);
+        }
+    }
+
+    function handleNextQuote() {
+        loadNewQuote();
+    }
+
+    function init() {
+        const randomIndex = Math.floor(Math.random() * QUOTES.length);
+        targetText = QUOTES[randomIndex];
+        selectedTimeLimit = 60;
+        timeLimitSelect.value = "60";
+        timeLeftSeconds = selectedTimeLimit;
+        updateTimerDisplay();
+        userTextarea.maxLength = targetText.length;
+        userTextarea.value = "";
+        userTextarea.disabled = false;
+        updateStatsAndHighlight();
+        statusMsgDiv.innerHTML = '<i class="fa-solid fa-hand-peace"></i> Dark organ ready. Select time or Next Quote. Type anywhere to begin.';
+        userTextarea.addEventListener('input', onUserInput);
+        resetBtn.addEventListener('click', handleReset);
+        nextQuoteBtn.addEventListener('click', handleNextQuote);
+        timeLimitSelect.addEventListener('change', onTimeLimitChange);
+        userTextarea.focus();
+    }
+
+    init();
+</script>
+</body>
+</html>
