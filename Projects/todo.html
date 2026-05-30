@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <input type="text" name="" id="" placeholder="Add task">
+    <button>add</button>
+    <ul>
+        <li>task1 <button>delete</button> <button>edit</button></li>
+    </ul>
+
+
+    <script>
+    let input = document.querySelector('input');
+    let button = document.querySelector('button');
+    let ul = document.querySelector('ul');
+
+    function addTask() {
+        if (input.value.trim() === "") {
+            alert("Please enter a task");
+            return;
+        }
+
+        let li = document.createElement("li");
+        let delbtn = document.createElement("button");
+        let edit = document.createElement("button");
+
+        edit.textContent = "edit";
+        delbtn.textContent = "delete";
+
+        li.textContent = input.value + " ";
+
+        li.appendChild(delbtn);
+        li.appendChild(edit);
+        ul.appendChild(li);
+
+        input.value = "";
+        // delbtn.addEventListener("click", function () {
+        //     ul.removeChild(li);
+        // });
+        // edit.addEventListener("click", function () {
+        //     let newTask = prompt("Edit task", li.textContent.replace("deleteedit", "").trim());
+        //     if (newTask !== null && newTask.trim() !== "") {
+        //         li.firstChild.textContent = newTask + " ";
+        //     }
+        // });
+    }
+
+    // Click button
+    button.addEventListener("click", addTask);
+
+    // Press Enter key
+    input.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            addTask();
+        }
+    });
+
+    ul.addEventListener("click", function (e) {
+        if(e.target.tagName === "BUTTON") {
+            let li = e.target.parentElement;
+            if (e.target.textContent === "delete") {
+                ul.removeChild(li);
+            } else if (e.target.textContent === "edit") {
+                let newTask = prompt("Edit task", li.firstChild.textContent.trim());
+                if (newTask !== null && newTask.trim() !== "") {
+                    li.firstChild.textContent = newTask + " ";
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
