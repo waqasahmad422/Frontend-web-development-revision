@@ -39,14 +39,23 @@
     <script>
         let btn = document.getElementById('btn');
         let div = document.querySelector('div');
+        function generateRandomColor(){
+            return Math.floor((Math.random()*255)+1);
+        }
         btn.addEventListener('click', function() {
-            let r=Math.floor((Math.random()*255)+1);
-            let g=Math.floor((Math.random()*255)+1);
-            let b=Math.floor((Math.random()*255)+1);
-            let randomColor = `rgb(${r}, ${g}, ${b})`;
+            
+            let randomColor = `rgb(${generateRandomColor(255)}, ${generateRandomColor(255)}, ${generateRandomColor(255)})`;
             div.style.backgroundColor = randomColor;
             div.textContent = `This is your new color: ${randomColor}`;
         });
+        // btn.addEventListener('click', function() {
+        //     let r=Math.floor((Math.random()*255)+1);
+        //     let g=Math.floor((Math.random()*255)+1);
+        //     let b=Math.floor((Math.random()*255)+1);
+        //     let randomColor = `rgb(${r}, ${g}, ${b})`;
+        //     div.style.backgroundColor = randomColor;
+        //     div.textContent = `This is your new color: ${randomColor}`;
+        // });
     </script>
 </body>
 </html>
