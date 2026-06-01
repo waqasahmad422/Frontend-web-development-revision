@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simon says</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="simon-wrap">
+        <div class="title">Simon Says</div>
+        <div class="board" id="board">
+            <button class="btn btn-tl" id="b0" aria-label="Green"></button>
+            <button class="btn btn-tr" id="b1" aria-label="Red"></button>
+            <button class="btn btn-bl" id="b2" aria-label="Yellow"></button>
+            <button class="btn btn-br" id="b3" aria-label="Blue"></button>
+            <div class="gap-center"></div>
+            <div class="gap-v"></div>
+            <div class="center">
+                <div class="score-display" id="score">0</div>
+                <div class="score-label">round</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-start" id="startBtn">Start</button>
+        </div>
+
+        <div class="status" id="status">Press start to play</div>
+        <div class="best-row">Best: <span id="best">0</span></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

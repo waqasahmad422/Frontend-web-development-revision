@@ -1,0 +1,147 @@
+
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body-placeholder { display: block; }
+
+  .simon-wrap {
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    background: transparent;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.4em;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  .board {
+    position: relative;
+    width: 320px;
+    height: 320px;
+  }
+
+  .btn {
+    position: absolute;
+    width: 148px;
+    height: 148px;
+    cursor: pointer;
+    border: none;
+    transition: filter 0.08s, transform 0.08s;
+    filter: brightness(0.45) saturate(0.7);
+  }
+
+  .btn:hover { filter: brightness(0.55) saturate(0.8); }
+
+  .btn.lit {
+    filter: brightness(1.1) saturate(1.2);
+    transform: scale(1.03);
+  }
+
+  .btn-tl { top: 0; left: 0; border-radius: 100% 0 0 0; background: #22c55e; }
+  .btn-tr { top: 0; right: 0; border-radius: 0 100% 0 0; background: #ef4444; }
+  .btn-bl { bottom: 0; left: 0; border-radius: 0 0 0 100%; background: #facc15; }
+  .btn-br { bottom: 0; right: 0; border-radius: 0 0 100% 0; background: #3b82f6; }
+
+  .center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92px;
+    height: 92px;
+    border-radius: 50%;
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  .score-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+
+  .score-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    margin-top: 1.75rem;
+    align-items: center;
+  }
+
+  .btn-start {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    padding: 10px 22px;
+    border-radius: 6px;
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.12s;
+  }
+
+  .btn-start:hover { background: var(--color-background-secondary); }
+  .btn-start:active { transform: scale(0.97); }
+
+  .status {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin-top: 1.25rem;
+    min-height: 16px;
+  }
+
+  .best-row {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.1em;
+    margin-top: 0.75rem;
+  }
+
+  .best-row span { color: var(--color-text-primary); font-weight: 500; }
+
+  .gap-center {
+    position: absolute;
+    top: 50%; left: 0; right: 0;
+    height: 24px;
+    transform: translateY(-50%);
+    background: var(--color-background-primary);
+    z-index: 5;
+  }
+  .gap-v {
+    position: absolute;
+    left: 50%; top: 0; bottom: 0;
+    width: 24px;
+    transform: translateX(-50%);
+    background: var(--color-background-primary);
+    z-index: 5;
+  }
