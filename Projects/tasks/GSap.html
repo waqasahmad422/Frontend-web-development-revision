@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0f172a;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .card {
+            background-color: #1e293b;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            width: 300px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #38bdf8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h1>Hello</h1>
+        <p>Welcome to GSAP + Typed.js mini Project series.</p>
+
+    </div>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <!-- Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        // GSAP Animation
+        gsap.to(".card", {
+            duration: 1,
+            opacity: 1,
+            scale: 1,
+            ease: "power3.out"
+        });
+
+        // Typed.js Effect
+        new Typed("#typed", {
+            strings: [
+                "Frontend Developer 🚀",
+                "GSAP Animator 🎬",
+                "JavaScript Learner 💻"
+            ],
+            typeSpeed: 60,
+            backSpeed: 30,
+            loop: true
+        });
+    </script>
+</body>
+
+</html>

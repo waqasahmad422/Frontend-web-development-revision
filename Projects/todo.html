@@ -1,81 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: blueviolet;
+        }
+
+        .box {
+            display: flex;
+            width: 100%;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .box input {
+            width: 75%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .box button {
+            width: 20%;
+            padding: 0% 10px;
+            margin-left: 10px;
+            border: none;
+            background-color: blueviolet;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .box button:hover {
+            scale: 0.97;
+            background-color: #5a189a;
+        }
+
+        ul {
+            list-style: none;
+            width: 100%;
+        }
+
+        ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        ul li button {
+            padding: 5px 10px;
+            border: none;
+            background-color: blueviolet;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        ul li button:hover {
+            background-color: #5a189a;
+            scale: 0.97;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                width: 90%;
+            }
+
+            .box input {
+                width: 70%;
+            }
+
+            .box button {
+                width: 25%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .box {
+                flex-direction: column;
+            }
+
+            .box input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .box button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 300px) {
+            ul li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            ul li button {
+                margin-top: 10px;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <h1>Todo List</h1>
-    <input type="text" name="" id="" placeholder="Add task">
-    <button>add</button>
-    <ul>
-        <li>task1 <button>delete</button> <button>edit</button></li>
-    </ul>
+    <div class="container">
+
+        <h1>Todo List</h1>
+        <div class="box"><input type="text" name="" id="" placeholder="Add task">
+            <button>add</button>
+        </div>
+        <ul>
+            <li>task1 <div class="btns"><button>delete</button> <button>edit</button></div>
+            </li>
+        </ul>
+    </div>
 
 
     <script>
-    let input = document.querySelector('input');
-    let button = document.querySelector('button');
-    let ul = document.querySelector('ul');
+        let input = document.querySelector("input");
+        let button = document.querySelector("button");
+        let ul = document.querySelector("ul");
 
-    function addTask() {
-        if (input.value.trim() === "") {
-            alert("Please enter a task");
-            return;
+        // Load tasks on page load
+        window.addEventListener("load", function () {
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.forEach(task => {
+                createTaskElement(task);
+            });
+        });
+
+        // Create task UI
+        function createTaskElement(taskText) {
+            let li = document.createElement("li");
+
+            let span = document.createElement("span");
+            span.textContent = taskText;
+
+            let delbtn = document.createElement("button");
+            delbtn.textContent = "delete";
+
+            let editbtn = document.createElement("button");
+            editbtn.textContent = "edit";
+
+            li.appendChild(span);
+            li.appendChild(delbtn);
+            li.appendChild(editbtn);
+
+            ul.appendChild(li);
         }
 
-        let li = document.createElement("li");
-        let delbtn = document.createElement("button");
-        let edit = document.createElement("button");
-
-        edit.textContent = "edit";
-        delbtn.textContent = "delete";
-
-        li.textContent = input.value + " ";
-
-        li.appendChild(delbtn);
-        li.appendChild(edit);
-        ul.appendChild(li);
-
-        input.value = "";
-        // delbtn.addEventListener("click", function () {
-        //     ul.removeChild(li);
-        // });
-        // edit.addEventListener("click", function () {
-        //     let newTask = prompt("Edit task", li.textContent.replace("deleteedit", "").trim());
-        //     if (newTask !== null && newTask.trim() !== "") {
-        //         li.firstChild.textContent = newTask + " ";
-        //     }
-        // });
-    }
-
-    // Click button
-    button.addEventListener("click", addTask);
-
-    // Press Enter key
-    input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-            addTask();
+        // Save to localStorage
+        function saveTask(task) {
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks.push(task);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         }
-    });
 
-    ul.addEventListener("click", function (e) {
-        if(e.target.tagName === "BUTTON") {
-            let li = e.target.parentElement;
+        // Add task
+        function addTask() {
+            let value = input.value.trim();
+
+            if (value === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            let task = value.charAt(0).toUpperCase() + value.slice(1);
+
+            createTaskElement(task);
+            saveTask(task);
+
+            input.value = "";
+        }
+
+        // Click add button
+        button.addEventListener("click", addTask);
+
+        // Enter key
+        input.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+                addTask();
+            }
+        });
+
+        // Delete & Edit (event delegation)
+        ul.addEventListener("click", function (e) {
+            let li = e.target.closest("li");
+
+            if (!li) return;
+
+            let taskText = li.querySelector("span").textContent;
+
             if (e.target.textContent === "delete") {
-                ul.removeChild(li);
-            } else if (e.target.textContent === "edit") {
-                let newTask = prompt("Edit task", li.firstChild.textContent.trim());
-                if (newTask !== null && newTask.trim() !== "") {
-                    li.firstChild.textContent = newTask + " ";
+                li.remove();
+                removeFromStorage(taskText);
+            }
+
+            if (e.target.textContent === "edit") {
+                let newTask = prompt("Edit task", taskText);
+
+                if (newTask && newTask.trim() !== "") {
+                    updateTask(taskText, newTask);
+                    li.querySelector("span").textContent =
+                        newTask.charAt(0).toUpperCase() + newTask.slice(1);
                 }
             }
+        });
+
+        // Remove task from storage
+        function removeFromStorage(taskText) {
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            tasks = tasks.filter(task => task !== taskText);
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         }
-    });
-</script>
+
+        // Update task in storage
+        function updateTask(oldTask, newTask) {
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+            let updated = tasks.map(task => {
+                if (task === oldTask) {
+                    return newTask.charAt(0).toUpperCase() + newTask.slice(1);
+                }
+                return task;
+            });
+
+            localStorage.setItem("tasks", JSON.stringify(updated));
+        }
+    </script>
 </body>
+
 </html>

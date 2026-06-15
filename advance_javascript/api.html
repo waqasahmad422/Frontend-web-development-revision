@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        // // json convert to object 
+        // let jsonResp='{"name":"waqas ahmad shah","intro":"my name is waqas ahmad","age":"24","city":"peshawar"}' ;
+        // let obj=JSON.parse(jsonResp);
+        // console.log(obj);
+
+        // // object convert ot json 
+        // let objRes={
+        //     name:"Tanveer Ahmad",
+        //     age: "34",
+        //     locaton: "peshawar",
+        //     intro: "my name is tanveer"
+        // };
+        // let valueRes=JSON.stringify(objRes);
+
+        // console.log(valueRes)
+
+        let url='https://catfact.ninja/fact';
+        fetch(url).then((res) => res.json()).then((data)=>{
+            Object.values(data).forEach((element)=>{
+                console.log(element)
+            })
+        })
+        .catch((err)=>{
+            console.log("errror ".err)
+        })
+    </script>
+</body>
+</html>

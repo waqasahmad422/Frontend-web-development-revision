@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Counter UI</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0f172a;
+            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            width: 280px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .count {
+            font-size: 70px;
+            color: #38bdf8;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .minus {
+            background: #ef4444;
+            color: white;
+        }
+
+        .reset {
+            background: #64748b;
+            color: white;
+        }
+
+        .plus {
+            background: #22c55e;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>Simple Counter</h2>
+
+        <div class="count">0</div>
+
+        <div class="buttons">
+            <button class="minus">-</button>
+            <button class="reset">Reset</button>
+            <button class="plus">+</button>
+        </div>
+
+    </div>
+    <script>
+        const countEl = document.querySelector(".count");
+        const buttons = document.querySelector(".buttons");
+
+        let count = 0;
+        buttons.addEventListener("click",(e)=>{
+            if(e.target.classList.contains("plus")){
+                count++;
+            }
+            if(e.target.classList.contains("minus")){
+                if(count>0) count--;
+            }
+            if(e.target.classList.contains("reset")){
+                count =0;
+            }
+            countEl.textContent=count;
+        })
+    </script>
+</body>
+
+</html>
